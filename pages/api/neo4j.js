@@ -13,5 +13,5 @@ export default async function handler(req, res) {
     const records = response.records.map((record) => {
         return record.toObject();
     })
-    res.status(200).json({body: records});
+    res.status(200).json({request: req, body: records});
 }

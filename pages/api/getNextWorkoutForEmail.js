@@ -9,13 +9,13 @@ const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
 
 export default async function handler(req, res) {
     if (req.query != null){
-        console.log(req.query);
+        console.log('the req.query', req.query);
     }
     if (req.method === 'POST'){
-        console.log(req.method);
+        console.log('the req.method', req.method);
     }
     const session = driver.session();
-    const response = await session.run('MATCH (w) RETURN LABELS(w), COUNT(w) AS count, w');
+    const response = await session.run('MATCH (u:User)-[c:completed]->(w:Workout) RETURN u, c, w');
 
     const records = response.records.map((record) => {
         return record.toObject();

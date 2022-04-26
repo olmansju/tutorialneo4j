@@ -14,4 +14,6 @@ export default async function handler(req, res) {
         return record.toObject();
     })
     res.status(200).json({body: records});
+
+    return { props: records};
 }
